@@ -31,9 +31,19 @@ class patenttest(Spider):
                 dont_filter=True)
 
     def detail(self, response):
+        item = IpcrawlerItem()
         sel = Selector(text=response.body)
         ips = sel.xpath("//table[@id='ip_list']/tr[position()>1]\
                 /td[3]/text()").extract()
         ports = sel.xpath("//table[@id='ip_list']/tr[position()>1]\
                 /td[4]/text()").extract()
+
+        if len(ips) == len(ports):
+            ip_port_tu = zip(ips, ports)
+            ip_port = ['http://'+":".join(item)+'\n' for item in ip_port_tu]
+            ips_ports = "".join(ip_port)
+            item['content'] = ips_ports
+            yield item
+        else:
+            log.msg("error in xpath",level=log.ERROR)
 
