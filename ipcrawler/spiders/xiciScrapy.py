@@ -37,11 +37,16 @@ class patenttest(Spider):
                 /td[3]/text()").extract()
         ports = sel.xpath("//table[@id='ip_list']/tr[position()>1]\
                 /td[4]/text()").extract()
+        scheme = sel.xpath("//table[@id='ip_list']/tr[position()>1]\
+                /td[7]/text()").extract()
 
         if len(ips) == len(ports):
-            ip_port_tu = zip(ips, ports)
-            ip_port = ['http://'+":".join(item)+'\n' for item in ip_port_tu]
+            te = zip(te1,te2)
+            last = zip(te3,[":".join(item) for item in te])
+            last = [(item[0].lower(),item[1]) for item in last]
+            ip_port = ["://".join(item) for item in last]
             ips_ports = "".join(ip_port)
+            print ips_ports
             item['content'] = ips_ports
             yield item
         else:
