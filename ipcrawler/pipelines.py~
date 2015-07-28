@@ -7,10 +7,11 @@
 
 import os
 
+os.chdir("e://DLdata")
 
 class IpcrawlerPipeline(object):
     def process_item(self, item, spider):
-        f = open("/home/dyh/data/ipcrawler/proxy_ips.txt", "a")
+        f = open("proxy_ips.txt", "a")
         writeIn = item['content']
         f.write(writeIn)
         f.close()

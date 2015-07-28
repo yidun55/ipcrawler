@@ -16,8 +16,6 @@ NEWSPIDER_MODULE = 'ipcrawler.spiders'
 DEFAULT_ITEM_CLASS = 'ipcrawler.items.PatenttestItem'
 ITEM_PIPELINES=['ipcrawler.pipelines.IpcrawlerPipeline']
 
-LOG_FILE = "/home/dyh/data/ipcrawler/log"
-
 DOWNLOADER_MIDDLEWARES = {
         'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware' : None,
         'scrapy.contrib.downloadermiddleware.retry.RetryMiddleware': 200,
